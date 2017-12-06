@@ -1,0 +1,43 @@
+// Variables modifiers
+// ========================================================================
+
+@navbar-nav-padding-horizontal:                 20px;
+@navbar-nav-color:                              @global-color;
+@navbar-nav-font-weight:                        300;
+@navbar-nav-hover-background:                   transparent;
+@navbar-nav-hover-color:                        @global-color;
+@navbar-nav-onclick-background:                 transparent;
+@navbar-nav-onclick-color:                      @global-color;
+@navbar-nav-active-background:                  transparent;
+@navbar-nav-active-color:                       @global-color;
+@navbar-nav-font-size:                          14px;
+@navbar-nav-font-weight:                        normal;
+
+/* Navbar modifiers
+ ========================================================================== */
+
+.hook-navbar-nav() {
+	font-family: @base-body-font-family;
+	text-transform: uppercase;
+	border-bottom: 2px solid transparent;
+
+	&:hover {
+		border-color: red;
+	}
+}
+
+/* Adjust the menu position */
+nav.tm-primary-menu {
+  position: absolute;
+	bottom: 0;
+	right: 0;
+}
+
+.uk-navbar-nav > li {
+	border-left: 1px solid #e3e3e3;
+}
+
+/* Add dropdown icon */
+.uk-navbar-nav > li[data-uk-dropdown] > a i {
+  margin-left: 5px;
+}

@@ -1,0 +1,42 @@
+.menu-bp-container .sub-menu,
+.menu-bp-container .menu {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.menu-bp-container .sub-menu {
+	margin-left: 20px;
+}
+
+.current-menu-item > .sub-menu,
+.current-menu-parent > .sub-menu {
+	display: block;
+}
+
+.menu-bp-container .menu .menu-parent a {
+	border-bottom: 1px solid #f4f4f4;
+}
+
+.menu-bp-container .menu .menu-parent a {
+	display: block;
+	padding: 4px 8px;
+	text-decoration: none;
+}
+
+.menu-bp-container .current-menu-item > a,
+.menu-bp-container .current-menu-parent > a {
+	background-color: #f4f4f4;
+	text-decoration: none;
+}
+
+.menu-bp-container .menu .menu-parent a:hover {
+	background-color: #eee;
+}
+
+.profile-fields .label {
+}
+
+.profile-fields p {
+	margin: 0;
+}
