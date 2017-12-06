@@ -7,6 +7,15 @@ function example_view_enqueue_uikit_assets() {
 	beans_uikit_enqueue_components( array( 'tab' ) );
 }
 
+// BuddyPress -> UI-kit
+
+function custom_bp_profile_group_tabs( $tabs, $groups, $group_name ) {
+	$tabs  = str_replace("class=\"current\">", "class=\"current uk-active\">", $tabs);
+	return $tabs;
+}
+
+add_filter('xprofile_filter_profile_group_tabs','custom_bp_profile_group_tabs', 1, 3);
+
 // remove beans_post_header
 beans_remove_action('beans_post_title');
 

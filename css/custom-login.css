@@ -1,0 +1,6 @@
+.login h1 a {
+  background-image: url('../assets/images/login-logo.png');
+}
+p#backtoblog {
+  display: none;
+}

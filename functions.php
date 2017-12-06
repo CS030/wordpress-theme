@@ -231,19 +231,34 @@ function beans_child_view_widget_area_sidebar() {
 	}
 }
 
-// custom buddypress nav
-add_action('bp_setup_nav', 'update_menu', 100);
-
-function update_menu() {
-	global $bp;
-	//unset($bp->bp_nav['settings']['profile']);
-	//print_r($bp->bp_nav['profile']);
+/**
+ * Add custom CSS to login page
+ */
+function my_custom_login() {
+	echo '<link rel="stylesheet" type="text/css" href="' . get_bloginfo('stylesheet_directory') . '/css/custom-login.css" />';
 }
+add_action('login_head', 'my_custom_login');
 
-// BuddyPress UI-kit
+function my_login_logo_url() {
+	return get_bloginfo( 'url' );
+}
+add_filter( 'login_headerurl', 'my_login_logo_url' );
 
-function custom_bp_profile_group_tabs( $tabs, $groups, $group_name ) {
-		$tabs  = str_replace("class=\"current\">", "class=\"uk-active\">", $tabs);
-		return $tabs;
-	}
-	add_filter('xprofile_filter_profile_group_tabs','custom_bp_profile_group_tabs', 1, 3);
+function my_login_logo_url_title() {
+	return 'CS030 de Utrechtse Wielervereninging';
+}
+add_filter( 'login_headertitle', 'my_login_logo_url_title' );
+
+function login_error_override() {
+    return 'Ongeldig gebruikersnaam of wachtwoord.';
+}
+add_filter('login_errors', 'login_error_override');
+
+function login_checked_remember_me() {
+	add_filter( 'login_footer', 'rememberme_checked' );
+}
+add_action( 'init', 'login_checked_remember_me' );
+
+function rememberme_checked() {
+	echo "<script>document.getElementById('rememberme').checked = true;</script>";
+}
