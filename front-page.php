@@ -1,5 +1,5 @@
 <?php
-/*
+
 // Enqueue UIkit components.
 add_action( 'beans_uikit_enqueue_scripts', 'example_view_enqueue_uikit_assets' );
 
@@ -10,34 +10,28 @@ function example_view_enqueue_uikit_assets() {
 }
 
 // remove main content
-*/
 //beans_remove_markup( 'theme_content' );
 beans_remove_action('beans_content_template');
 beans_remove_action('beans_fixed_wrap[_main]');
 
-/*
 // Add the subheader slider.
-add_action( 'beans_main_append_markup', 'example_view_subheader_slider' );
+add_action( 'beans_header_append_markup', 'example_view_subheader_slider' );
 
 function example_view_subheader_slider() {
 	?>
-	<div class="uk-slidenav-position" data-uk-slideshow="{autoplay:true}">
-		<ul class="uk-slideshow">
-			<li><img src="https://getuikit.com/docs/images/placeholder_800x400_1.jpg"></li>
-			<li><img src="https://getuikit.com/docs/images/placeholder_800x400_2.jpg"></li>
-			<li><img src="https://getuikit.com/docs/images/placeholder_800x400_3.jpg"></li>
+	<section class="uk-slidenav-position" data-uk-slideshow="{autoplay:true, height: 320, kenburns:true}">
+		<ul class="uk-slideshow uk-overlay-active">
+			<li>
+				<img src="<?=get_stylesheet_directory_uri()?>/assets/images/header_image_1.jpg">
+			</li>
+			<li>
+				<img src="<?=get_stylesheet_directory_uri()?>/assets/images/header_image_2.jpg">
+			</li>
 		</ul>
-		<a href="" class="uk-slidenav uk-slidenav-contrast uk-slidenav-previous" data-uk-slideshow-item="previous"></a>
-		<a href="" class="uk-slidenav uk-slidenav-contrast uk-slidenav-next" data-uk-slideshow-item="next"></a>
-		<ul class="uk-dotnav uk-dotnav-contrast uk-position-bottom uk-flex-center">
-			<li data-uk-slideshow-item="0"><a href=""></a></li>
-			<li data-uk-slideshow-item="1"><a href=""></a></li>
-			<li data-uk-slideshow-item="2"><a href=""></a></li>
-		</ul>
-	</div>
+	</section>
 	<?php
 }
-*/
+
 
 // Add the subheader custom static content.
 add_action( 'beans_main_append_markup', 'example_view_subheader_content' );
@@ -49,16 +43,7 @@ function example_view_subheader_content() {
 ?>
 <div class="uk-container uk-container-center">
 	<div class="uk-grid uk-grid-large">
-		<div class="uk-width-large-1-3">
-			<div class="uk-panel uk-panel-header">
-				<h3 class="uk-panel-title">Strava</h3>
 
-				[Widget of iets anders]
-				<!--
-				<iframe src="https://www.strava.com/clubs/cs030/latest-rides/967dd20fefc282bc01f53764ee8c3a66e1bce83e?show_rides=true" width="300" height="454" frameborder="0" scrolling="no"></iframe>
-				-->
-			</div>
-		</div>
 		<div class="uk-width-large-1-3">
 			<div class="uk-panel uk-panel-header">
 				<h3 class="uk-panel-title">Laatste blog posts</h3>
@@ -72,6 +57,7 @@ function example_view_subheader_content() {
 				<?php endforeach; wp_reset_postdata(); ?>
 			</div>
 		</div>
+
 		<div class="uk-width-large-1-3">
 			<div class="uk-panel uk-panel-header">
 				<h3 class="uk-panel-title">Video</h3>
@@ -79,6 +65,15 @@ function example_view_subheader_content() {
 					<iframe src="https://giphy.com/embed/3ohs884D1B78fiNIS4" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
 				</div>
 				<p>Bekijk al onze video's op <a href="https://vimeo.com/user51613890" target="_blank">Vimeo</a></p>
+			</div>
+		</div>
+
+		<div class="uk-width-large-1-3">
+			<div class="uk-panel uk-panel-header">
+				<h3 class="uk-panel-title">Strava</h3>
+
+				<iframe height="160" width="100%" frameborder="0" allowtransparency="true" scrolling="no" src="https://www.strava.com/clubs/cs030/latest-rides/967dd20fefc282bc01f53764ee8c3a66e1bce83e?show_rides=false"></iframe>
+
 			</div>
 		</div>
 	</div>
