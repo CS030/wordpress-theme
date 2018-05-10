@@ -38,18 +38,32 @@ add_action( 'beans_main_append_markup', 'example_view_subheader_content' );
 
 function example_view_subheader_content() {
 	global $post;
-	$posts = get_posts( array( 'posts_per_page' => 3 ) );
-	//print_r($posts);
+
+	$cat_id = get_cat_ID('Nieuws');
+
+	$posts = get_posts(
+		array(
+			'posts_per_page' => 3,
+			'tax_query' => array(
+				array(
+					'taxonomy' => 'category',
+					'terms' => array($cat_id),
+					'field' => 'term_id',
+					'include_children' => is_user_logged_in() ? true : false
+				)
+			)
+		)
+	);
 ?>
 <div class="uk-container uk-container-center">
 	<div class="uk-grid uk-grid-large">
 
 		<div class="uk-width-large-1-3">
 			<div class="uk-panel uk-panel-header">
-				<h3 class="uk-panel-title">Laatste blog posts</h3>
+				<h3 class="uk-panel-title">Laatste nieuws</h3>
 				<?php foreach ($posts as $post) : setup_postdata($post); //begin The Loop ?>
 					<article class="uk-article">
-						<h3 class=""><?php the_title(); ?></h3>
+					<a href="<?php the_permalink() ?>" title="<?php the_title(); ?>"><h3 class=""><?php the_title(); ?></h3></a>
 						<span class="uk-article-meta"><?php the_date(); ?></span>
 						<?php the_excerpt(); ?>
 						<a href="<?php the_permalink() ?>" title="<?php the_title(); ?>">Lees meer</a>
@@ -70,12 +84,43 @@ function example_view_subheader_content() {
 
 		<div class="uk-width-large-1-3">
 			<div class="uk-panel uk-panel-header">
-				<h3 class="uk-panel-title">Strava</h3>
+				<h3 class="uk-panel-title">Sponsoren</h3>
 
+				<!--
 				<iframe height="160" width="100%" frameborder="0" allowtransparency="true" scrolling="no" src="https://www.strava.com/clubs/cs030/latest-rides/967dd20fefc282bc01f53764ee8c3a66e1bce83e?show_rides=false"></iframe>
+				-->
+			</div>
+		</div>
+	</div>
+</div>
+<div class="uk-container uk-container-center">
+	<div class="uk-grid uk-grid-large">
+		<div class="uk-width-large-1-1 uk-visible-large">
+			<div class="uk-panel uk-panel-header">
+
+				<h2 class="uk-panel-title">Sponsoren</h2>
+
+				<div class="uk-flex uk-flex-middle">
+					<div class="uk-width-large-1-5 uk-text-center">
+						<a href=""><img src="<?=get_stylesheet_directory_uri()?>/assets/images/sponsoren/fonq.png" class="image image--sponsor"></a>
+					</div>
+					<div class="uk-width-large-1-5 uk-text-center">
+						<a href=""><img src="<?=get_stylesheet_directory_uri()?>/assets/images/sponsoren/de-fietsenmaker.png" class="image image--sponsor"></a>
+					</div>
+					<div class="uk-width-large-1-5 uk-text-center">
+						<a href=""><img src="<?=get_stylesheet_directory_uri()?>/assets/images/sponsoren/platformation.png" class="image image--sponsor"></a>
+					</div>
+					<div class="uk-width-large-1-5 uk-text-center">
+						<a href=""><img src="<?=get_stylesheet_directory_uri()?>/assets/images/sponsoren/giant-store-utrecht.png" class="image image--sponsor"></a>
+					</div>
+					<div class="uk-width-large-1-5 uk-text-center">
+						<a href=""><img src="<?=get_stylesheet_directory_uri()?>/assets/images/sponsoren/beers-and-barrels.png" class="image image--sponsor"></a>
+					</div>
+				</div>
 
 			</div>
 		</div>
+
 	</div>
 </div>
 <?php

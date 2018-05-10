@@ -9,26 +9,29 @@ remove_theme_support( 'beans-default-styling' );
 
 
 // Enqueue uikit assets
-beans_add_smart_action( 'beans_uikit_enqueue_scripts', 'totem_enqueue_uikit_assets', 7 );
+beans_add_smart_action( 'beans_uikit_enqueue_scripts', 'cs_enqueue_uikit_assets', 7 );
 
-function totem_enqueue_uikit_assets() {
+function cs_enqueue_uikit_assets() {
 
 	// Enqueue uikit extra components
 	beans_uikit_enqueue_components( array( 'flex' ) );
 
 	// Enqueue uikit overwrite theme folder
-	beans_uikit_enqueue_theme( 'totem', get_stylesheet_directory_uri() . '/assets/less/uikit' );
+	beans_uikit_enqueue_theme( 'cs', get_stylesheet_directory_uri() . '/assets/less/uikit' );
 
 	// Add the theme style as a uikit fragment to have access to all the variables
-	beans_compiler_add_fragment( 'uikit', get_stylesheet_directory_uri() . '/assets/less/style.less', 'less' );
+	beans_compiler_add_fragment( 'uikit', array(
+		get_stylesheet_directory_uri() . '/assets/less/style.less',
+		get_stylesheet_directory_uri() . '/assets/less/image.less',
+	), 'less' );
 
 }
 
 
 // Remove page post type comment support
-beans_add_smart_action( 'init', 'totem_post_type_support' );
+beans_add_smart_action( 'init', 'cs_post_type_support' );
 
-function totem_post_type_support() {
+function cs_post_type_support() {
 
 	remove_post_type_support( 'page', 'comments' );
 
@@ -36,9 +39,9 @@ function totem_post_type_support() {
 
 
 // Setup document fragements, markups and attributes
-beans_add_smart_action( 'wp', 'totem_setup_document' );
+beans_add_smart_action( 'wp', 'cs_setup_document' );
 
-function totem_setup_document() {
+function cs_setup_document() {
 
 	// Header
 	beans_remove_attribute( 'beans_header', 'class', ' uk-block' );
@@ -100,9 +103,9 @@ function totem_setup_document() {
 
 
 // Modify beans layout (filter)
-beans_add_smart_action( 'beans_layout_grid_settings', 'totem_layout_grid_settings' );
+beans_add_smart_action( 'beans_layout_grid_settings', 'cs_layout_grid_settings' );
 
-function totem_layout_grid_settings( $layouts ) {
+function cs_layout_grid_settings( $layouts ) {
 
 	return array_merge( $layouts, array(
 		'grid' => 10,
@@ -114,9 +117,9 @@ function totem_layout_grid_settings( $layouts ) {
 
 
 // Modify beans default layout (filter)
-beans_add_smart_action( 'beans_default_layout', 'totem_default_layout' );
+beans_add_smart_action( 'beans_default_layout', 'cs_default_layout' );
 
-function totem_default_layout( $layouts ) {
+function cs_default_layout( $layouts ) {
 
 	return 'sp_c_ss';
 
@@ -124,9 +127,9 @@ function totem_default_layout( $layouts ) {
 
 
 // Modify the categories widget count (filter)
-beans_add_smart_action( 'beans_widget_count_output', 'totem_widget_counts' );
+beans_add_smart_action( 'beans_widget_count_output', 'cs_widget_counts' );
 
-function totem_widget_counts() {
+function cs_widget_counts() {
 
 	return '$2';
 
@@ -134,9 +137,9 @@ function totem_widget_counts() {
 
 
 // Modify the tags cloud widget (filter)
-beans_add_smart_action( 'wp_generate_tag_cloud', 'totem_widget_tags_cloud' );
+beans_add_smart_action( 'wp_generate_tag_cloud', 'cs_widget_tags_cloud' );
 
-function totem_widget_tags_cloud( $output ) {
+function cs_widget_tags_cloud( $output ) {
 
 	$output = preg_replace( '#tag-link-#', 'uk-button uk-button-mini tag-link-', $output );
 	$output = preg_replace( "#style='font-size:.+pt;'#", '', $output );
@@ -147,9 +150,9 @@ function totem_widget_tags_cloud( $output ) {
 
 
 // Remove comment after note (filter).
-beans_add_smart_action( 'comment_form_defaults', 'totem_comment_form_defaults' );
+beans_add_smart_action( 'comment_form_defaults', 'cs_comment_form_defaults' );
 
-function totem_comment_form_defaults( $args ) {
+function cs_comment_form_defaults( $args ) {
 
 	$args['comment_notes_after'] = '';
 
@@ -159,9 +162,9 @@ function totem_comment_form_defaults( $args ) {
 
 
 // Modify comment title
-beans_add_smart_action( 'beans_comment_title_append_markup', 'totem_comment_title_prefix' );
+beans_add_smart_action( 'beans_comment_title_append_markup', 'cs_comment_title_prefix' );
 
-function totem_comment_title_prefix() {
+function cs_comment_title_prefix() {
 
 	echo beans_open_markup( 'totem_comment_title_extra', 'span', array(
 			'class' => 'uk-margin-small-left',
@@ -175,27 +178,38 @@ function totem_comment_title_prefix() {
 
 
 // Add avatar uikit circle class (filter)
-beans_add_smart_action( 'get_avatar', 'totem_avatar' );
+beans_add_smart_action( 'get_avatar', 'cs_avatar' );
 
-function totem_avatar( $output ) {
+function cs_avatar( $output ) {
 
 	return str_replace( "class='avatar", "class='avatar uk-border-circle", $output ) ;
 
 }
 
 
-// Add footer content (filter)
-beans_add_smart_action( 'beans_footer_credit_right_text_output', 'totem_footer' );
+// Overwrite the footer content.
+beans_modify_action_callback( 'beans_footer_content', 'beans_child_footer_content' );
 
-function totem_footer() { ?>
-
-<?php }
+function beans_child_footer_content() {
+		// TODO: should move this somewhere in the CMS.
+?>
+	<div class="uk-grid">
+			<div class="uk-width-medium-1-2">
+				// Footer links 1
+			</div>
+			<div class="uk-width-medium-1-2">
+				// Footer links 2
+			</div>
+	</div>
+<?php
+}
 
 // Remove the site title tag.
 beans_remove_action( 'beans_site_title_tag' );
 
 // hide admin bar for non admins
 add_action('set_current_user', 'cc_hide_admin_bar');
+
 function cc_hide_admin_bar() {
   if (!current_user_can('edit_posts')) {
 		add_filter( 'show_admin_bar', '__return_false', PHP_INT_MAX );
@@ -267,7 +281,7 @@ function rememberme_checked() {
  * Supersaas filter
  */
 
-add_filter( 'do_shortcode_tag','supersaas_format_output', 10, 3);
+add_filter( 'do_shortcode_tag', 'supersaas_format_output', 10, 3);
 
 function supersaas_format_output($output, $tag, $attr){
 	if('supersaas' != $tag)
@@ -333,3 +347,7 @@ function dequeue_mailpoet() {
 	}
 }
 add_action('wp_enqueue_scripts', 'dequeue_mailpoet');
+
+// remove layout
+beans_remove_action(  'beans_do_register_post_meta' ); // will remove the options from pages
+beans_remove_action(  'beans_do_register_term_meta' ); // will remove the options from posts
