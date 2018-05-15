@@ -39,7 +39,7 @@ add_action( 'beans_main_append_markup', 'example_view_subheader_content' );
 function example_view_subheader_content() {
 	global $post;
 
-	$cat_id = get_cat_ID('Nieuws');
+	$cat_id = get_field('news_category', 'option');
 
 	$posts = get_posts(
 		array(
@@ -60,21 +60,16 @@ function example_view_subheader_content() {
 
 		<div class="uk-width-large-1-3">
 			<div class="uk-panel uk-panel-header">
-				<h3 class="uk-panel-title">Laatste nieuws</h3>
-				<?php foreach ($posts as $post) : setup_postdata($post); //begin The Loop ?>
-					<article class="uk-article">
-					<a href="<?php the_permalink() ?>" title="<?php the_title(); ?>"><h3 class=""><?php the_title(); ?></h3></a>
-						<span class="uk-article-meta"><?php the_date(); ?></span>
-						<?php the_excerpt(); ?>
-						<a href="<?php the_permalink() ?>" title="<?php the_title(); ?>">Lees meer</a>
-					</article>
-				<?php endforeach; wp_reset_postdata(); ?>
+				<h3 class="uk-panel-title">CS030</h3>
+
+				<p>Korte intro over CS030 met wat opsommingen waar we voor staan? Met daarna link naar Over CS030, aanmelden etc.</p>
 			</div>
 		</div>
 
 		<div class="uk-width-large-1-3">
 			<div class="uk-panel uk-panel-header">
-				<h3 class="uk-panel-title">Video</h3>
+				<h3 class="uk-panel-title">CS030 in beeld</h3>
+
 				<div style="width:100%;height:0;padding-bottom:56%;position:relative;">
 					<iframe src="https://giphy.com/embed/3ohs884D1B78fiNIS4" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
 				</div>
@@ -84,13 +79,27 @@ function example_view_subheader_content() {
 
 		<div class="uk-width-large-1-3">
 			<div class="uk-panel uk-panel-header">
-				<h3 class="uk-panel-title">Sponsoren</h3>
+				<h3 class="uk-panel-title">Laatste nieuws</h3>
 
-				<!--
-				<iframe height="160" width="100%" frameborder="0" allowtransparency="true" scrolling="no" src="https://www.strava.com/clubs/cs030/latest-rides/967dd20fefc282bc01f53764ee8c3a66e1bce83e?show_rides=false"></iframe>
-				-->
+				<div class="news">
+				<?php foreach ($posts as $post) : setup_postdata($post); //begin The Loop ?>
+					<a href="<?php the_permalink() ?>" title="<?php the_title(); ?>" class="news__item">
+						<div class="news__content">
+							<h3 class="news__title"><?php the_title(); ?></h3>
+							<p class="news__intro"><?php echo get_the_excerpt(); ?></p>
+						</div>
+
+						<div class="news__date">
+							<span class="news__date-day"><?php echo get_the_date('j'); ?></span>
+							<span class="news__date-month"><?php echo get_the_date('F'); ?></span>
+							<span class="news__date-year"><?php echo get_the_date('Y'); ?></span>
+						</div>
+					</a>
+				<?php endforeach; wp_reset_postdata(); ?>
+				</div>
 			</div>
 		</div>
+
 	</div>
 </div>
 <div class="uk-container uk-container-center">

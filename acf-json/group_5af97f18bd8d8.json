@@ -1,0 +1,46 @@
+{
+    "key": "group_5af97f18bd8d8",
+    "title": "Settings",
+    "fields": [
+        {
+            "key": "field_5af97f1efabec",
+            "label": "Nieuws",
+            "name": "news_category",
+            "type": "taxonomy",
+            "instructions": "Hoofd categorie voor nieuws",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "taxonomy": "category",
+            "field_type": "radio",
+            "allow_null": 0,
+            "add_term": 1,
+            "save_terms": 0,
+            "load_terms": 0,
+            "return_format": "id",
+            "multiple": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "cs_settings"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1526300982
+}

@@ -3,10 +3,11 @@
 // Include Beans
 require_once( get_template_directory() . '/lib/init.php' );
 
+// Include custom made scripts
+require_once('includes/custom-login.php');
 
 // Remove Beans Default Styling
 remove_theme_support( 'beans-default-styling' );
-
 
 // Enqueue uikit assets
 beans_add_smart_action( 'beans_uikit_enqueue_scripts', 'cs_enqueue_uikit_assets', 7 );
@@ -23,20 +24,18 @@ function cs_enqueue_uikit_assets() {
 	beans_compiler_add_fragment( 'uikit', array(
 		get_stylesheet_directory_uri() . '/assets/less/style.less',
 		get_stylesheet_directory_uri() . '/assets/less/image.less',
+		get_stylesheet_directory_uri() . '/assets/less/news.less',
+		get_stylesheet_directory_uri() . '/assets/less/filter.less',
 	), 'less' );
 
 }
-
 
 // Remove page post type comment support
 beans_add_smart_action( 'init', 'cs_post_type_support' );
 
 function cs_post_type_support() {
-
 	remove_post_type_support( 'page', 'comments' );
-
 }
-
 
 // Setup document fragements, markups and attributes
 beans_add_smart_action( 'wp', 'cs_setup_document' );
@@ -67,8 +66,8 @@ function cs_setup_document() {
 	beans_modify_action_hook( 'beans_post_image', 'beans_post_title_before_markup' );
 
 	// Post meta
-	beans_remove_action( 'beans_post_meta' );
-	beans_remove_action( 'beans_post_meta_tags' );
+	//beans_remove_action( 'beans_post_meta' );
+	//beans_remove_action( 'beans_post_meta_author' );
 	beans_remove_action( 'beans_post_meta_categories' );
 
 	// Post read more
@@ -101,6 +100,11 @@ function cs_setup_document() {
 
 }
 
+// Modify the read more text.
+add_filter( 'beans_post_more_link_text_output', 'cs_modify_read_more' );
+function cs_modify_read_more() {
+	return 'Lees meer';
+}
 
 // Modify beans layout (filter)
 beans_add_smart_action( 'beans_layout_grid_settings', 'cs_layout_grid_settings' );
@@ -120,21 +124,15 @@ function cs_layout_grid_settings( $layouts ) {
 beans_add_smart_action( 'beans_default_layout', 'cs_default_layout' );
 
 function cs_default_layout( $layouts ) {
-
 	return 'sp_c_ss';
-
 }
-
 
 // Modify the categories widget count (filter)
 beans_add_smart_action( 'beans_widget_count_output', 'cs_widget_counts' );
 
 function cs_widget_counts() {
-
 	return '$2';
-
 }
-
 
 // Modify the tags cloud widget (filter)
 beans_add_smart_action( 'wp_generate_tag_cloud', 'cs_widget_tags_cloud' );
@@ -153,11 +151,8 @@ function cs_widget_tags_cloud( $output ) {
 beans_add_smart_action( 'comment_form_defaults', 'cs_comment_form_defaults' );
 
 function cs_comment_form_defaults( $args ) {
-
 	$args['comment_notes_after'] = '';
-
 	return $args;
-
 }
 
 
@@ -186,6 +181,15 @@ function cs_avatar( $output ) {
 
 }
 
+// Add CS settings page
+if( function_exists('acf_add_options_page') ) {
+	acf_add_options_page(array(
+		'page_title'	=> 'CS Settings',
+		'menu_title'	=> 'CS Settings',
+		'menu_slug'		=> 'cs_settings',
+		'capability'	=> 'edit_posts'
+	));
+}
 
 // Overwrite the footer content.
 beans_modify_action_callback( 'beans_footer_content', 'beans_child_footer_content' );
@@ -217,7 +221,6 @@ function cc_hide_admin_bar() {
 }
 
 // Add login sidebar
-
 add_action( 'widgets_init', 'beans_child_register_widget_areas' );
 
 /**
@@ -245,37 +248,6 @@ function beans_child_view_widget_area_sidebar() {
 	}
 }
 
-/**
- * Add custom CSS to login page
- */
-function my_custom_login() {
-	echo '<link rel="stylesheet" type="text/css" href="' . get_bloginfo('stylesheet_directory') . '/css/custom-login.css" />';
-}
-add_action('login_head', 'my_custom_login');
-
-function my_login_logo_url() {
-	return get_bloginfo( 'url' );
-}
-add_filter( 'login_headerurl', 'my_login_logo_url' );
-
-function my_login_logo_url_title() {
-	return 'CS030 de Utrechtse Wielervereninging';
-}
-add_filter( 'login_headertitle', 'my_login_logo_url_title' );
-
-function login_error_override() {
-    return 'Ongeldig gebruikersnaam of wachtwoord.';
-}
-add_filter('login_errors', 'login_error_override');
-
-function login_checked_remember_me() {
-	add_filter( 'login_footer', 'rememberme_checked' );
-}
-add_action( 'init', 'login_checked_remember_me' );
-
-function rememberme_checked() {
-	echo "<script>document.getElementById('rememberme').checked = true;</script>";
-}
 
 /**
  * Supersaas filter
@@ -348,6 +320,44 @@ function dequeue_mailpoet() {
 }
 add_action('wp_enqueue_scripts', 'dequeue_mailpoet');
 
-// remove layout
+// remove layouts
 beans_remove_action(  'beans_do_register_post_meta' ); // will remove the options from pages
 beans_remove_action(  'beans_do_register_term_meta' ); // will remove the options from posts
+
+// Change except length to max 20 words.
+function cs_custom_excerpt_length( $length ) {
+	return 20;
+}
+add_filter( 'excerpt_length', 'cs_custom_excerpt_length', 999 );
+
+// Change the posts query to load only 'Nieuws' when not logged in.
+add_action('pre_get_posts', 'cs_alter_query');
+
+function cs_alter_query($query) {
+
+	if (!$query->is_main_query())
+		return;
+
+	if(!is_user_logged_in()) {
+		$cat_id = get_cat_ID('Nieuws');
+		$query->set('category__in', $cat_id);
+	}
+
+	remove_all_actions ( '__after_loop');
+}
+
+// set default layout
+beans_add_filter( 'beans_layout', 'c_sp' );
+
+// Add meta to head
+add_action( 'beans_head', 'cs_head_meta' );
+
+function cs_head_meta() {
+?>
+<meta name="theme-color" content="#ed1b24" />
+<link rel="manifest" href="<?php echo get_stylesheet_directory_uri() ?>/assets/manifest.webmanifest">
+
+<?php
+}
+
+beans_remove_action( 'beans_post_navigation' );

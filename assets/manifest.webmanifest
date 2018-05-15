@@ -1,0 +1,17 @@
+{
+  "name": "CS030",
+  "short_name": "CS030",
+  "start_url": "/",
+  "display": "minimal-ui",
+	"background_color": "#ed1b24",
+	"theme_color": "#ed1b24",
+	"description": "De Utrechtse Wielervereniging",
+	"lang": "nl_NL",
+	"icons": [
+		{
+			"src": "./images/logo-login.jpg",
+			"sizes": "512x512",
+			"type": "image/jpeg"
+		}
+	]
+}
