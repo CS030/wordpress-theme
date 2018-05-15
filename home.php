@@ -1,6 +1,6 @@
 <?php
 /**
- * Custom Blog homepage
+ * Custom Blog homepage /nieuws
  */
 
 /**

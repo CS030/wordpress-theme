@@ -1,4 +1,8 @@
 <?php
+/**
+ * Custom for buddypress profile pages
+ */
+
 // Enqueue UIkit components.
 add_action( 'beans_uikit_enqueue_scripts', 'example_view_enqueue_uikit_assets' );
 

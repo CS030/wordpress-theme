@@ -1,4 +1,7 @@
 <?php
+/**
+ * Default customizations
+ */
 
 // Include Beans
 require_once( get_template_directory() . '/lib/init.php' );
@@ -26,6 +29,9 @@ function cs_enqueue_uikit_assets() {
 		get_stylesheet_directory_uri() . '/assets/less/image.less',
 		get_stylesheet_directory_uri() . '/assets/less/news.less',
 		get_stylesheet_directory_uri() . '/assets/less/filter.less',
+		get_stylesheet_directory_uri() . '/assets/less/footer.less',
+		get_stylesheet_directory_uri() . '/assets/less/highlight.less',
+		get_stylesheet_directory_uri() . '/assets/less/avatar.less',
 	), 'less' );
 
 }
@@ -195,14 +201,13 @@ if( function_exists('acf_add_options_page') ) {
 beans_modify_action_callback( 'beans_footer_content', 'beans_child_footer_content' );
 
 function beans_child_footer_content() {
-		// TODO: should move this somewhere in the CMS.
 ?>
 	<div class="uk-grid">
 			<div class="uk-width-medium-1-2">
-				// Footer links 1
+				<?php echo beans_widget_area( 'footer_1' );?>
 			</div>
 			<div class="uk-width-medium-1-2">
-				// Footer links 2
+				<?php echo beans_widget_area( 'footer_2' );?>
 			</div>
 	</div>
 <?php
@@ -228,10 +233,22 @@ add_action( 'widgets_init', 'beans_child_register_widget_areas' );
  */
 function beans_child_register_widget_areas() {
 
-    beans_register_widget_area( array(
-        'name' => 'Sidebar ingelogd',
-        'id' => 'sidebar_login'
-    ) );
+	beans_deregister_widget_area( 'sidebar_secondary' );
+
+	beans_register_widget_area( array(
+			'name' => 'Sidebar ingelogd',
+			'id' => 'sidebar_login'
+	) );
+
+	beans_register_widget_area( array(
+		'name' => 'Footer 1',
+		'id' => 'footer_1'
+	));
+
+	beans_register_widget_area( array(
+		'name' => 'Footer 2',
+		'id' => 'footer_2'
+	));
 }
 
 // Edit sidebar action
