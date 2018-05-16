@@ -1,3 +1,11 @@
+/* Base */
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
 /* Variables
  ========================================================================== */
 
@@ -7,17 +15,11 @@
 /* Font
  ========================================================================== */
 
-// @import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500,700,300italic,400italic,500italic);
-
 
 /* Header
  ========================================================================== */
 .tm-header {
 	//min-height: 300px;
-
-	img.tm-logo {
-		height: 50px;
-	}
 }
 
 .uk-slidenav-position {
@@ -25,27 +27,39 @@
 	@media (min-width: @breakpoint-large) {
 		display: block;
 		height: 280px;
+		z-index: -1;
 	}
 }
 
 .tm-overlay-navigation {
-	// position: fixed;
-	// width: 100%;
-	// padding: 10px 20px;
 	background-color: #f4f4f4;
-  //border-radius: 0 0 @global-border-radius * 2 @global-border-radius * 2;
 	box-shadow: 0 0 4px 0 rgba(0,0,0,0.2);
 
 	.uk-container {
 		position: relative;
 	}
 }
+.tm-site-branding {
+	position: absolute;
+	height: 70px;
+	z-index: 10;
+	padding: 10px 20px;
+	background-color: #f4f4f4;
+	border-radius: 0 0 20px 20px;
+}
 
 .tm-site-branding a {
   text-transform: uppercase;
 	font-weight: bold;
-	padding: 10px 0;
 	display: inline-block;
+}
+
+.tm-site-branding img {
+	height: 50px;
+}
+
+.offcanvas-menu-button {
+	margin: 8px 0;
 }
 
 /* Phone landscape and smaller */

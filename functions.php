@@ -32,6 +32,7 @@ function cs_enqueue_uikit_assets() {
 		get_stylesheet_directory_uri() . '/assets/less/footer.less',
 		get_stylesheet_directory_uri() . '/assets/less/highlight.less',
 		get_stylesheet_directory_uri() . '/assets/less/avatar.less',
+		get_stylesheet_directory_uri() . '/assets/less/home.less',
 	), 'less' );
 
 }
@@ -57,6 +58,8 @@ function cs_setup_document() {
 
 	// Navigation
 	beans_add_attribute( 'beans_sub_menu_wrap', 'class', 'uk-dropdown-center' );
+	beans_add_attribute( 'beans_sub_menu_wrap', 'class', 'uk-dropdown-small' );
+	beans_add_attribute( 'beans_primary_menu_offcanvas_button', 'class', 'offcanvas-menu-button');
 	beans_remove_attribute( 'beans_menu_item_child_indicator', 'class', 'uk-margin-small-left' );
 
 	// Offcanvas
