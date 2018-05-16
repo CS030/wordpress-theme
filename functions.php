@@ -72,7 +72,8 @@ function cs_setup_document() {
 	beans_add_attribute( 'beans_post_more_link', 'class', 'uk-button uk-button-small' );
 
 	// Post image
-	beans_modify_action_hook( 'beans_post_image', 'beans_post_title_before_markup' );
+	//beans_modify_action_hook( 'beans_post_image', 'beans_post_title_before_markup' );
+	beans_remove_action( 'beans_post_image' );
 
 	// Post meta
 	//beans_remove_action( 'beans_post_meta' );
