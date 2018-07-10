@@ -208,10 +208,10 @@ function beans_child_footer_content() {
 ?>
 	<div class="uk-grid">
 			<div class="uk-width-medium-1-2">
-				<?php echo beans_widget_area( 'footer_1' );?>
+				<?php echo beans_get_widget_area_output( 'footer_1' );?>
 			</div>
 			<div class="uk-width-medium-1-2">
-				<?php echo beans_widget_area( 'footer_2' );?>
+				<?php echo beans_get_widget_area_output( 'footer_2' );?>
 			</div>
 	</div>
 <?php
@@ -263,9 +263,9 @@ beans_modify_action_callback( 'beans_widget_area_sidebar_primary', 'beans_child_
  */
 function beans_child_view_widget_area_sidebar() {
 	if (is_user_logged_in()) {
-    echo beans_widget_area( 'sidebar_login' );
+    echo beans_get_widget_area_output( 'sidebar_login' );
 	} else {
-    echo beans_widget_area( 'sidebar_primary' );
+    echo beans_get_widget_area_output( 'sidebar_primary' );
 	}
 }
 
