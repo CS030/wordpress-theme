@@ -8,6 +8,7 @@ require_once( get_template_directory() . '/lib/init.php' );
 
 // Include custom made scripts
 require_once('includes/custom-login.php');
+require_once('includes/custom-api.php');
 
 // Remove Beans Default Styling
 remove_theme_support( 'beans-default-styling' );
@@ -382,3 +383,20 @@ function cs_head_meta() {
 }
 
 beans_remove_action( 'beans_post_navigation' );
+
+// Filter leden menu
+add_filter( 'wp_nav_menu_objects', 'leden_menu', 10, 2 );
+
+function leden_menu($items, $args ) {
+
+	if ($args->theme_location !== 'primary')
+		return $items;
+
+	if (is_user_logged_in())
+		return $items;
+
+	return array_filter( $items, function( $item ) {
+			return get_page_template_slug($item->object_id) != 'leden.php';
+	} );
+
+}
