@@ -9,6 +9,7 @@ require_once( get_template_directory() . '/lib/init.php' );
 // Include custom made scripts
 require_once('includes/custom-login.php');
 require_once('includes/custom-api.php');
+require_once('includes/custom-woocommerce.php');
 
 // Remove Beans Default Styling
 remove_theme_support( 'beans-default-styling' );
