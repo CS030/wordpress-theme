@@ -35,6 +35,7 @@ function cs_enqueue_uikit_assets() {
 		get_stylesheet_directory_uri() . '/assets/less/highlight.less',
 		get_stylesheet_directory_uri() . '/assets/less/avatar.less',
 		get_stylesheet_directory_uri() . '/assets/less/home.less',
+		get_stylesheet_directory_uri() . '/assets/less/woocommerce.less',
 	), 'less' );
 
 }
@@ -293,7 +294,7 @@ function supersaas_format_output($output, $tag, $attr){
  // remove woocommerce scripts on unnecessary pages
 function woocommerce_de_script() {
 	if (function_exists( 'is_woocommerce' )) {
-		if (!is_woocommerce() && !is_cart() && !is_checkout() && !is_account_page() ) { // if we're not on a Woocommerce page, dequeue all of these scripts
+		if (!is_woocommerce() && !is_cart() && !is_checkout() && !is_account_page()) { // if we're not on a Woocommerce page, dequeue all of these scripts
 			wp_dequeue_script('wc-add-to-cart');
 			wp_dequeue_script('jquery-blockui');
 			wp_dequeue_script('jquery-placeholder');
@@ -316,7 +317,7 @@ function remove_woocommerce_generator() {
 // remove woocommerce styles, then add woo styles back in on woo-related pages
 function child_manage_woocommerce_css(){
 	if (function_exists( 'is_woocommerce' )) {
-		if (!is_woocommerce()) { // this adds the styles back on woocommerce pages. If you're using a custom script, you could remove these and enter in the path to your own CSS file (if different from your basic style.css file)
+		if (!is_woocommerce() && !is_cart() && !is_checkout() && !is_account_page()) { // this adds the styles back on woocommerce pages. If you're using a custom script, you could remove these and enter in the path to your own CSS file (if different from your basic style.css file)
 			wp_dequeue_style('woocommerce-layout');
 			wp_dequeue_style('woocommerce-smallscreen');
 			wp_dequeue_style('woocommerce-general');
