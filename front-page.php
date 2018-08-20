@@ -147,7 +147,7 @@ function cs_view_sponsoren() {
 		<div class="uk-width-large-1-1 uk-visible-large">
 			<div class="uk-panel uk-panel-header">
 
-				<h2 class="uk-panel-title">Sponsoren</h2>
+				<h2 class="uk-panel-title">Partners</h2>
 
 				<div class="uk-flex uk-flex-middle">
 <?php
