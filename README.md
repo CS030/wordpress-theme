@@ -7,13 +7,18 @@ The CS030 Wordpress Theme is a custom Beans child theme build using the [Beans F
 The following plugins are used for the CS030 website.
 
 - [Advanced Custom Fields](https://www.advancedcustomfields.com)
+- Autoptimize
+- Better Search Replace
 - BuddyPress
+- Import users from CSV with meta
+- Invite Anyone
 - MailPoet 3
 - [Restrict User Access](https://github.com/intoxstudio/restrict-user-access)
 - Simple shortcode buttons
 - SuperSaas Login (modified)
 - WC4BP -> WooCommerce BuddyPress Integration
 - WooCommerce
+- WP Mail SMTP
 
 ## Custom Build
 
