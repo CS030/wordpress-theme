@@ -6,6 +6,9 @@
 // Include Beans
 require_once( get_template_directory() . '/lib/init.php' );
 
+// Load translation
+load_child_theme_textdomain( 'tm-beans', get_stylesheet_directory() . '/languages/' );
+
 // Include custom made scripts
 require_once('includes/custom-login.php');
 require_once('includes/custom-api.php');
