@@ -144,17 +144,17 @@ function cs_view_sponsoren() {
 ?>
 <section class="uk-container uk-container-center">
 	<div class="uk-grid uk-grid-large">
-		<div class="uk-width-large-1-1 uk-visible-large">
+		<div class="uk-width-large-1-1">
 			<div class="uk-panel uk-panel-header">
 
 				<h2 class="uk-panel-title">Partners</h2>
 
-				<div class="uk-flex uk-flex-middle">
+				<div class="uk-grid uk-flex-middle">
 <?php
 		foreach( $sponsoren as $sponsor):
 			$imgUrl = $sponsor["logo"]["sizes"]["medium"];
 ?>
-					<div class="uk-width-large-1-5 uk-text-center">
+					<div class="uk-width-large-1-5 uk-width-1-2 uk-width-uk-text-center">
 						<?php if ($sponsor["page"]) : ?><a href="<?php echo $sponsor["page"]; ?>"><?php endif; ?>
 							<img src="<?php echo $imgUrl; ?>" class="image image--sponsor" alt="<?php echo $sponsor["name"]; ?>">
 						<?php if ($sponsor["page"]) : ?></a><?php endif; ?>
