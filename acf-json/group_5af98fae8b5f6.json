@@ -172,7 +172,7 @@
         },
         {
             "key": "field_5af98fec033db",
-            "label": "Sponsoren",
+            "label": "Partners",
             "name": "sponsoren",
             "type": "repeater",
             "instructions": "",
@@ -252,6 +252,89 @@
                     "multiple": 0
                 }
             ]
+        },
+        {
+            "key": "field_5ccc3b7e7cc1a",
+            "label": "Ledenvoordeel",
+            "name": "ledenvoordeel",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": 0,
+            "max": 0,
+            "layout": "table",
+            "button_label": "",
+            "sub_fields": [
+                {
+                    "key": "field_5ccc3b7f7cc1b",
+                    "label": "Naam",
+                    "name": "name",
+                    "type": "text",
+                    "instructions": "Naam",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_5ccc3b7f7cc1c",
+                    "label": "Logo",
+                    "name": "logo",
+                    "type": "image",
+                    "instructions": "Logo",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array",
+                    "preview_size": "thumbnail",
+                    "library": "all",
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": ""
+                },
+                {
+                    "key": "field_5ccc3b7f7cc1d",
+                    "label": "Pagina",
+                    "name": "page",
+                    "type": "page_link",
+                    "instructions": "Pagina",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "post_type": "",
+                    "taxonomy": "",
+                    "allow_null": 0,
+                    "allow_archives": 1,
+                    "multiple": 0
+                }
+            ]
         }
     ],
     "location": [
@@ -274,5 +357,5 @@
     ],
     "active": 1,
     "description": "",
-    "modified": 1526376448
+    "modified": 1556888464
 }

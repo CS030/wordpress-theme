@@ -171,6 +171,42 @@ function cs_view_sponsoren() {
 	endif;
 }
 
+add_action( 'beans_main_append_markup', 'cs_view_ledenvooredel' );
+
+function cs_view_ledenvooredel() {
+	$ledenvoordeel = get_field('ledenvoordeel');
+
+	if ($ledenvoordeel) :
+?>
+<section class="uk-container uk-container-center">
+	<div class="uk-grid uk-grid-large">
+		<div class="uk-width-large-1-1">
+			<div class="uk-panel uk-panel-header">
+
+				<h2 class="uk-panel-title">Ledenvoordeel</h2>
+
+				<div class="uk-grid uk-flex-middle">
+<?php
+		foreach( $ledenvoordeel as $voordeel):
+			$imgUrl = $voordeel["logo"]["sizes"]["medium"];
+?>
+					<div class="uk-width-large-1-3 uk-width-1-2 uk-text-center">
+						<?php if ($voordeel["page"]) : ?><a href="<?php echo $voordeel["page"]; ?>"><?php endif; ?>
+							<img src="<?php echo $imgUrl; ?>" class="image image--sponsor" alt="<?php echo $voordeel["name"]; ?>">
+						<?php if ($voordeel["page"]) : ?></a><?php endif; ?>
+					</div>
+<?php
+		endforeach;
+?>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<?php
+	endif;
+}
+
 
 // Remove sidebar by setting the layout to content only.
 beans_add_filter( 'beans_layout', 'c' );
