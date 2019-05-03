@@ -178,7 +178,7 @@ function cs_view_ledenvooredel() {
 
 	if ($ledenvoordeel) :
 ?>
-<section class="uk-container uk-container-center">
+<section class="uk-container uk-container-center uk-margin-large-top">
 	<div class="uk-grid uk-grid-large">
 		<div class="uk-width-large-1-1">
 			<div class="uk-panel uk-panel-header">
