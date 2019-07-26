@@ -112,13 +112,13 @@ function cs_view_highlight() {
 						<a href="<?php the_permalink() ?>" title="<?php the_title(); ?>" class="news__item">
 							<div class="news__content">
 								<h3 class="news__title"><?php the_title(); ?></h3>
-								<p class="news__intro"><?php echo get_the_excerpt(); ?></p>
+								<!-- <p class="news__intro"><?php echo get_the_excerpt(); ?></p> -->
 							</div>
 
 							<div class="news__date">
 								<span class="news__date-day"><?php echo get_the_date('j'); ?></span>
 								<span class="news__date-month"><?php echo get_the_date('F'); ?></span>
-								<span class="news__date-year"><?php echo get_the_date('Y'); ?></span>
+								<!-- <span class="news__date-year"><?php echo get_the_date('Y'); ?></span> -->
 							</div>
 						</a>
 					<?php endforeach; wp_reset_postdata(); ?>
