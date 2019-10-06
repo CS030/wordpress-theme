@@ -9,7 +9,7 @@
 	"lang": "nl_NL",
 	"icons": [
 		{
-			"src": "./images/logo-login.jpg",
+			"src": "./images/logo-login.png",
 			"sizes": "512x512",
 			"type": "image/jpeg"
 		}
